@@ -1,0 +1,11 @@
+[package]
+name = "my_os"
+version = "0.1.0"
+authors = ["Tamamu <tamamu.1r1s@gmail.com>"]
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+rlibc = "*"
+spin = "*"
