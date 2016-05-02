@@ -4,24 +4,25 @@ use core::ptr::Unique;
 use core::fmt::Write;
 use spin::Mutex;
 
+#[allow(dead_code)]
 #[repr(u8)]
 pub enum Color {
-    Black      = 0,
-    Blue       = 1,
-    Green      = 2,
-    Cyan       = 3,
-    Red        = 4,
-    Magenta    = 5,
-    Brown      = 6,
-    LightGray  = 7,
-    DarkGray   = 8,
-    LightBlue  = 9,
+    Black = 0,
+    Blue = 1,
+    Green = 2,
+    Cyan = 3,
+    Red = 4,
+    Magenta = 5,
+    Brown = 6,
+    LightGray = 7,
+    DarkGray = 8,
+    LightBlue = 9,
     LightGreen = 10,
-    LightCyan  = 11,
-    LightRed   = 12,
-    Pink       = 13,
-    Yellow     = 14,
-    White      = 15,
+    LightCyan = 11,
+    LightRed = 12,
+    Pink = 13,
+    Yellow = 14,
+    White = 15,
 }
 
 #[derive(Clone, Copy)]
@@ -54,7 +55,7 @@ pub struct Writer {
 }
 
 impl Writer {
-    pub fn write_byte(&mut self, byte: u8){
+    pub fn write_byte(&mut self, byte: u8) {
         match byte {
             b'\n' => self.new_line(),
             byte => {
@@ -81,15 +82,15 @@ impl Writer {
     }
 
     fn buffer(&mut self) -> &mut Buffer {
-        unsafe{ self.buffer.get_mut() } /* get_mut() method of Unique is unsafe */
+        unsafe { self.buffer.get_mut() } /* get_mut() method of Unique is unsafe */
     }
 
     fn new_line(&mut self) {
-        for row in 0..(BUFFER_HEIGHT-1) {
+        for row in 0..(BUFFER_HEIGHT - 1) {
             let buffer = self.buffer();
             buffer.chars[row] = buffer.chars[row + 1]
         }
-        self.clear_row(BUFFER_HEIGHT-1);
+        self.clear_row(BUFFER_HEIGHT - 1);
         self.column_position = 0;
     }
 
@@ -135,7 +136,7 @@ pub fn print_something() {
 
     writer.write_byte(b'H');
     writer.write_str("ello! ");
-    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0);
+    write!(writer, "The numbers are {} and {}", 42, 1.0 / 3.0);
 }
 
 impl ::core::fmt::Write for Writer {
